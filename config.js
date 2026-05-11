@@ -17,13 +17,13 @@ const CONFIG = {
   //
   // Free quota: 10,000 units/day (~100 searches) — more than enough.
   // ------------------------------------------------------------------
-  YOUTUBE_API_KEY: 'YOUR_YOUTUBE_API_KEY_HERE',
+  YOUTUBE_API_KEY: 'AIzaSyDChm9vqHJ80CTZeqF8vxTfuingxarN1wo',
 
   // ------------------------------------------------------------------
   // Default language loaded when the page opens
   // Must match exactly one of the <option> values in index.html
   // ------------------------------------------------------------------
-  DEFAULT_LANGUAGE: 'Spanish',
+  DEFAULT_LANGUAGE: 'English',
 
   // ------------------------------------------------------------------
   // Number of video results to fetch per search (max 50)
