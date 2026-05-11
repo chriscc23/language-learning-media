@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinguaMedia — Learn Languages Through Real Content</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body class="dark-theme">
+
+  <!-- ===== HEADER ===== -->
+  <header id="siteHeader">
+    <div class="header-left">
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#" class="logo" id="logoLink">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="11" fill="#e53935"/>
+          <polygon points="10,8 10,16 17,12" fill="white"/>
+        </svg>
+        <span>Lingua<strong>Media</strong></span>
+      </a>
+    </div>
+
+    <div class="header-center">
+      <div class="search-bar">
+        <div class="lang-selector-wrap">
+          <select id="languageSelect" class="lang-select" aria-label="Select language to learn">
+            <option value="Spanish">🇪🇸 Spanish</option>
+            <option value="French">🇫🇷 French</option>
+            <option value="German">🇩🇪 German</option>
+            <option value="Japanese">🇯🇵 Japanese</option>
+            <option value="Chinese">🇨🇳 Chinese</option>
+            <option value="Korean">🇰🇷 Korean</option>
+            <option value="Italian">🇮🇹 Italian</option>
+            <option value="Portuguese">🇧🇷 Portuguese</option>
+            <option value="Russian">🇷🇺 Russian</option>
+            <option value="Arabic">🇸🇦 Arabic</option>
+            <option value="Dutch">🇳🇱 Dutch</option>
+            <option value="Swedish">🇸🇪 Swedish</option>
+            <option value="Polish">🇵🇱 Polish</option>
+            <option value="Turkish">🇹🇷 Turkish</option>
+            <option value="Hindi">🇮🇳 Hindi</option>
+          </select>
+        </div>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search any topic to learn in your chosen language…"
+          autocomplete="off"
+          aria-label="Search topic"
+        />
+        <button class="search-btn" id="searchBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button class="translate-toggle" id="translateToggle" title="Toggle hover translation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 5h12M9 3v2m3 13l4-9 4 9m-6.5-2h5M3 10s2.5 5 6.5 5 5-3 5-3"/>
+        </svg>
+        <span>Translate</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== TRANSLATION POPUP ===== -->
+  <div id="translationPopup" class="translation-popup hidden" role="tooltip">
+    <div class="popup-original" id="popupOriginal"></div>
+    <div class="popup-arrow">→</div>
+    <div class="popup-translated" id="popupTranslated">
+      <span class="popup-text" id="popupText"></span>
+      <span class="popup-loading hidden" id="popupLoading">…</span>
+    </div>
+    <div class="popup-lang" id="popupLang"></div>
+  </div>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <div class="page-layout" id="pageLayout">
+
+    <!-- SIDEBAR LEFT (hidden by default, shown when menu open) -->
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-section">
+        <div class="nav-label">Trending Topics</div>
+        <ul id="trendingList">
+          <li><button class="nav-item" data-query="cooking">🍳 Cooking</button></li>
+          <li><button class="nav-item" data-query="travel">✈️ Travel</button></li>
+          <li><button class="nav-item" data-query="music">🎵 Music</button></li>
+          <li><button class="nav-item" data-query="sports">⚽ Sports</button></li>
+          <li><button class="nav-item" data-query="technology">💻 Technology</button></li>
+          <li><button class="nav-item" data-query="art">🎨 Art</button></li>
+          <li><button class="nav-item" data-query="history">📚 History</button></li>
+          <li><button class="nav-item" data-query="nature">🌿 Nature</button></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+
+      <!-- HOME SCREEN (shown before any search) -->
+      <section class="home-screen" id="homeScreen">
+        <div class="hero">
+          <h1>Learn any language through content you love</h1>
+          <p>Search for any topic — get videos and articles in your chosen language, with instant hover translation.</p>
+          <div class="hero-cta">
+            <span class="cta-tip">👆 Pick a language above, then search any topic to begin</span>
+          </div>
+        </div>
+        <div class="featured-grid">
+          <div class="featured-label">Popular searches</div>
+          <div class="chip-row" id="chipRow">
+            <button class="chip" data-query="cooking">Cooking</button>
+            <button class="chip" data-query="travel">Travel</button>
+            <button class="chip" data-query="music">Music</button>
+            <button class="chip" data-query="sports">Sports</button>
+            <button class="chip" data-query="technology">Technology</button>
+            <button class="chip" data-query="cinema">Cinema</button>
+            <button class="chip" data-query="fashion">Fashion</button>
+            <button class="chip" data-query="health">Health</button>
+            <button class="chip" data-query="science">Science</button>
+            <button class="chip" data-query="politics">Politics</button>
+          </div>
+        </div>
+        <!-- API key warning (shown if no key set) -->
+        <div class="api-warning hidden" id="apiWarning">
+          <div class="api-warning-icon">⚠️</div>
+          <div>
+            <strong>YouTube API key not configured.</strong>
+            <span>Open <code>config.js</code> and paste your free key — see <a href="README.md" target="_blank">README.md</a> for steps.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTS SCREEN (shown after search) -->
+      <section class="results-screen hidden" id="resultsScreen">
+
+        <!-- Result header row -->
+        <div class="results-header">
+          <h2 class="results-title" id="resultsTitle"></h2>
+          <div class="results-tabs">
+            <button class="tab active" data-tab="videos" id="tabVideos">Videos</button>
+            <button class="tab" data-tab="articles" id="tabArticles">Articles</button>
+            <button class="tab" data-tab="all" id="tabAll">All</button>
+          </div>
+        </div>
+
+        <!-- VIDEO GRID -->
+        <div class="section-block" id="videoSection">
+          <div class="video-grid" id="videoGrid">
+            <!-- Video cards injected here -->
+          </div>
+        </div>
+
+        <!-- ARTICLE GRID -->
+        <div class="section-block hidden" id="articleSection">
+          <div class="article-grid" id="articleGrid">
+            <!-- Article cards injected here -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- PLAYER SCREEN (shown when a video is clicked) -->
+      <section class="player-screen hidden" id="playerScreen">
+        <button class="back-btn" id="backBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Back to results
+        </button>
+
+        <div class="player-layout">
+          <div class="player-main">
+            <div class="player-wrap">
+              <iframe
+                id="youtubePlayer"
+                src=""
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="player-info">
+              <h2 class="player-title" id="playerTitle"></h2>
+              <div class="player-meta" id="playerMeta"></div>
+              <div class="player-desc translatable" id="playerDesc"></div>
+            </div>
+          </div>
+          <aside class="player-sidebar">
+            <div class="sidebar-label">Up next</div>
+            <div class="sidebar-list" id="sidebarList">
+              <!-- Sidebar video cards injected here -->
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- LOADING OVERLAY -->
+      <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loadingText">Searching…</div>
+      </div>
+
+      <!-- ERROR STATE -->
+      <div class="error-state hidden" id="errorState">
+        <div class="error-icon">😕</div>
+        <div class="error-msg" id="errorMsg"></div>
+        <button class="retry-btn" id="retryBtn">Try again</button>
+      </div>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR (suggestions, shown in results/player) -->
+    <aside class="suggestions-panel hidden" id="suggestionsPanel">
+      <div class="sidebar-label">Suggested for you</div>
+      <div class="suggestions-list" id="suggestionsList"></div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
